@@ -1,44 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js GLTF Loader</title>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
-    </style>
-</head>
-<body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script>
-        // Initialize the scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+import bpy
 
-        // Load the .glb model
-        const loader = new THREE.GLTFLoader();
-        loader.load('path/to/your/model.glb', function (gltf) {
-            scene.add(gltf.scene);
-            alert('Model loaded successfully!');
-        }, undefined, function (error) {
-            console.error(error);
-            alert('An error occurred while loading the model.');
-        });
+# Clear existing objects
+bpy.ops.wm.read_factory_settings(use_empty=True)
 
-        // Camera position
-        camera.position.z = 5;
+# Add a plane
+bpy.ops.mesh.primitive_plane_add(size=2, enter_editmode=False, align='WORLD', location=(0, 0, 0))
 
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
-    </script>
-</body>
-</html>
+# Switch to Edit Mode
+bpy.ops.object.mode_set(mode='EDIT')
+
+# Extrude the plane to create a pop-up effect
+bpy.ops.mesh.extrude_region_move(
+    TRANSFORM_OT_translate={"value":(0, 0, 0.5)}
+)
+
+# Switch back to Object Mode
+bpy.ops.object.mode_set(mode='OBJECT')
+
+# Export to .ply
+bpy.ops.export_mesh.ply(filepath="/path/to/save/pop_up_model.ply")
