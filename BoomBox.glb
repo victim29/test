@@ -1,21 +1,31 @@
 import bpy
 
-# Clear existing objects
-bpy.ops.wm.read_factory_settings(use_empty=True)
+def create_car():
+    # Clear existing objects
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    
+    # Create the car body (a simple cube)
+    bpy.ops.mesh.primitive_cube_add(size=2, location=(0, 0, 1))
+    car_body = bpy.context.object
+    car_body.scale[0] = 2  # Length
+    car_body.scale[1] = 1  # Width
+    car_body.scale[2] = 0.5  # Height
+    
+    # Create wheels (cylinders)
+    wheel_positions = [
+        (-1.5, 0.9, 0.2),
+        (1.5, 0.9, 0.2),
+        (-1.5, -0.9, 0.2),
+        (1.5, -0.9, 0.2),
+    ]
+    
+    for pos in wheel_positions:
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.3, depth=0.6, location=pos)
+        wheel = bpy.context.object
+        wheel.rotation_euler[0] = 1.5708  # Rotate the cylinder to be horizontal
+    
+    # Export to .glb
+    bpy.ops.export_scene.gltf(filepath="/path/to/save/car_model.glb", export_format='GLB')
 
-# Add a plane
-bpy.ops.mesh.primitive_plane_add(size=2, enter_editmode=False, align='WORLD', location=(0, 0, 0))
-
-# Switch to Edit Mode
-bpy.ops.object.mode_set(mode='EDIT')
-
-# Extrude the plane to create a pop-up effect
-bpy.ops.mesh.extrude_region_move(
-    TRANSFORM_OT_translate={"value":(0, 0, 0.5)}
-)
-
-# Switch back to Object Mode
-bpy.ops.object.mode_set(mode='OBJECT')
-
-# Export to .ply
-bpy.ops.export_mesh.ply(filepath="/path/to/save/pop_up_model.ply")
+# Run the function to create the car
+create_car()
