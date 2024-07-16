@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Fetch Example</title>
+</head>
+<body>
+    <h1>Image Fetch Example</h1>
+    <div id="imageContainer">
+        <!-- Image will be displayed here -->
+    </div>
+
+    <script>
+        // Replace 'YOUR_IMAGE_URL' with the URL of the image you want to fetch
+        const imageUrl = 'YOUR_IMAGE_URL';
+
+        // Create an image element
+        const img = document.createElement('img');
+
+        // Set the 'src' attribute of the image to the URL
+        img.src = imageUrl;
+
+        // Append the image to the container div
+        document.getElementById('imageContainer').appendChild(img);
+    </script>
+</body>
+</html>
