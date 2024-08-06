@@ -13,7 +13,7 @@
 <body>
     <h1>Click the image to see the alert</h1>
     <a href="path_to_your_image.jpg" onclick="showAlert(); return false;">
-        <img src="path_to_your_image.jpg" alt="JPEG Image" width="200">
+        <img src="https://wallpapercave.com/wp/wp5184277.jpg" alt="JPEG Image" width="200">
     </a>
 </body>
 </html>
