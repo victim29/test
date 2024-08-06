@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPEG Alert</title>
+    <script>
+        function showAlert() {
+            alert("You have opened a JPEG file!");
+        }
+    </script>
+</head>
+<body>
+    <h1>Click the image to see the alert</h1>
+    <a href="path_to_your_image.jpg" onclick="showAlert(); return false;">
+        <img src="path_to_your_image.jpg" alt="JPEG Image" width="200">
+    </a>
+</body>
+</html>
